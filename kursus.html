@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursus Media Pembelajaran Interaktif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .course-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .course-card h3 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .course-card .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .cta-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease;
+        }
+
+        .cta-section h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .benefit-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .benefit-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            header p {
+                font-size: 1em;
+            }
+
+            .cta-section {
+                padding: 30px 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8em;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="floating">🚀 Kursus Media Pembelajaran Interaktif</h1>
+            <p>Tingkatkan Keterampilan Anda dalam Pengembangan Media Pembelajaran Digital</p>
+        </header>
+
+        <div class="course-grid">
+            <div class="course-card" style="animation-delay: 0.1s">
+                <div class="course-number">1</div>
+                <h3>Media Pembelajaran VBA for Excel</h3>
+                <p>Pelajari cara membuat media pembelajaran interaktif menggunakan VBA Excel untuk meningkatkan engagement siswa.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">VBA</span>
+                    <span class="tech-tag">Excel</span>
+                    <span class="tech-tag">Interaktif</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.2s">
+                <div class="course-number">2</div>
+                <h3>Pembuatan LKPD Integrasi Firebase dan VBA Excel</h3>
+                <p>Kembangkan Lembar Kerja Peserta Didik dengan integrasi cloud database Firebase untuk pembelajaran modern.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">VBA Excel</span>
+                    <span class="tech-tag">Cloud</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.3s">
+                <div class="course-number">3</div>
+                <h3>LKPD Interaktif Google Sheet & VBA Excel</h3>
+                <p>Integrasi Google Sheet dengan VBA Excel untuk menciptakan LKPD kolaboratif dan real-time.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Google Sheet</span>
+                    <span class="tech-tag">VBA</span>
+                    <span class="tech-tag">Kolaborasi</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.4s">
+                <div class="course-number">4</div>
+                <h3>Game Matematika Interaktif VBA Excel Firebase</h3>
+                <p>Ciptakan game matematika yang menarik dengan scoreboard online menggunakan Firebase database.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Game</span>
+                    <span class="tech-tag">Matematika</span>
+                    <span class="tech-tag">Firebase</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.5s">
+                <div class="course-number">5</div>
+                <h3>Media Pembelajaran VBA PowerPoint</h3>
+                <p>Buat presentasi interaktif dan dinamis dengan VBA PowerPoint untuk pengalaman belajar yang lebih engaging.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">VBA</span>
+                    <span class="tech-tag">PowerPoint</span>
+                    <span class="tech-tag">Presentasi</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.6s">
+                <div class="course-number">6</div>
+                <h3>Media Online Streamlit/Flask Python</h3>
+                <p>Kembangkan aplikasi web pembelajaran menggunakan framework Python modern seperti Streamlit atau Flask.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.7s">
+                <div class="course-number">7</div>
+                <h3>Media Interaktif Google Colab</h3>
+                <p>Manfaatkan Google Colab untuk membuat notebook pembelajaran interaktif dengan Python dan visualisasi data.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Google Colab</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Jupyter</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.8s">
+                <div class="course-number">8</div>
+                <h3>Dashboard Media dengan Eel Python</h3>
+                <p>Buat aplikasi desktop dengan interface web modern menggunakan Eel Python untuk dashboard pembelajaran.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Eel</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Dashboard</span>
+                </div>
+            </div>
+
+            <div class="course-card" style="animation-delay: 0.9s">
+                <div class="course-number">9</div>
+                <h3>Media Pembelajaran Online HTML, CSS, JS</h3>
+                <p>Kuasai fundamental web development untuk membuat media pembelajaran online yang responsif dan interaktif.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Siap Meningkatkan Keterampilan Anda?</h2>
+            <p>Bergabunglah dengan ribuan pendidik yang telah mengembangkan media pembelajaran inovatif!</p>
+            
+            <div class="benefits">
+                <div class="benefit-item">
+                    <h4>📚 Materi Lengkap</h4>
+                    <p>Pembelajaran step-by-step dari dasar hingga mahir</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>👨‍🏫 Instruktur Berpengalaman</h4>
+                    <p>Dibimbing oleh praktisi profesional</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>🎓 Sertifikat</h4>
+                    <p>Dapatkan sertifikat setelah menyelesaikan kursus</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>💬 Konsultasi Gratis</h4>
+                    <p>Akses forum diskusi dan konsultasi online</p>
+                </div>
+            </div>
+
+            <a href="#" class="register-btn" onclick="handleRegister(event)">DAFTAR SEKARANG</a>
+            <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
+                *Kuota terbatas! Daftar sebelum kehabisan tempat
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function handleRegister(e) {
+            e.preventDefault();
+            alert('Terima kasih atas minat Anda!\n\nUntuk pendaftaran, silakan hubungi:\n📧 Email: info@kursus-media.com\n📱 WhatsApp: 0812-3456-7890\n\natau kunjungi website kami untuk informasi lebih lanjut.');
+        }
+
+        // Animasi saat scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Efek parallax ringan pada header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
