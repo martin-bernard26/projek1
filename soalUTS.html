@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal Projek Media Pembelajaran Matematika - VBA Excel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .soal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .soal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .soal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .soal-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .soal-title {
+            flex: 1;
+        }
+
+        .soal-title h2 {
+            color: #333;
+            font-size: 1.6em;
+            margin-bottom: 5px;
+        }
+
+        .kemampuan-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .soal-content {
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-bottom: 25px;
+        }
+
+        .soal-content strong {
+            color: #667eea;
+        }
+
+        .indikator-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .indikator-section h3 {
+            color: #d64545;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+
+        .indikator-section h3:before {
+            content: "📊";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .indikator-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .indikator-list li {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: start;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .indikator-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .indikator-list li:before {
+            content: "✓";
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ketentuan-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ketentuan-box h4 {
+            color: #4a5568;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .ketentuan-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ketentuan-box ul li {
+            color: #2d3748;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .ketentuan-box ul li:before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.8em;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+            
+            .soal-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .soal-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📐 Soal Projek Media Pembelajaran Matematika</h1>
+            <p>Pembuatan Media Interaktif Menggunakan VBA for Excel</p>
+            <p style="margin-top: 10px; font-weight: 600; color: #667eea;">Program Studi Pendidikan Matematika</p>
+        </div>
+
+        <!-- SOAL 1 - KOMUNIKASI -->
+        <div class="soal-card">
+            <div class="soal-header">
+                <div class="soal-number">1</div>
+                <div class="soal-title">
+                    <h2>Media Pembelajaran Sistem Persamaan Linear</h2>
+                    <span class="kemampuan-badge">Kemampuan Komunikasi Matematis</span>
+                </div>
+            </div>
+
+            <div class="soal-content">
+                <p><strong>Deskripsi Projek:</strong></p>
+                <p>Buatlah sebuah media pembelajaran interaktif berbasis VBA for Excel yang dapat membantu siswa SMA memahami konsep <strong>Sistem Persamaan Linear Dua Variabel (SPLDV)</strong>. Media yang Anda buat harus mampu memfasilitasi siswa untuk mengkomunikasikan ide-ide matematis mereka baik secara visual, simbolik, maupun verbal.</p>
+                
+                <div class="ketentuan-box">
+                    <h4>🎯 Ketentuan Media:</h4>
+                    <ul>
+                        <li>Menyediakan input untuk koefisien persamaan linear (ax + by = c)</li>
+                        <li>Menampilkan representasi grafik kedua persamaan pada koordinat Kartesius</li>
+                        <li>Menunjukkan langkah-langkah penyelesaian dengan metode eliminasi, substitusi, atau grafik</li>
+                        <li>Menyediakan fitur penjelasan tekstual untuk setiap langkah penyelesaian</li>
+                        <li>Menampilkan interpretasi solusi dalam konteks masalah nyata</li>
+                        <li>Menggunakan navigasi yang intuitif dan desain visual yang menarik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="indikator-section">
+                <h3>Indikator Penilaian Kemampuan Komunikasi Matematis</h3>
+                <ul class="indikator-list">
+                    <li><strong>Representasi Visual (Skor: 25)</strong><br>
+                    Kemampuan media menampilkan grafik persamaan linear dengan akurat, termasuk titik potong, label sumbu, dan grid koordinat yang jelas</li>
+                    
+                    <li><strong>Representasi Simbolik (Skor: 20)</strong><br>
+                    Kemampuan media menampilkan notasi matematis yang benar untuk persamaan, variabel, dan solusi menggunakan simbol-simbol matematika standar</li>
+                    
+                    <li><strong>Ekspresi Verbal/Tekstual (Skor: 25)</strong><br>
+                    Kemampuan media menyajikan penjelasan langkah-langkah penyelesaian dengan bahasa yang sistematis, logis, dan mudah dipahami</li>
+                    
+                    <li><strong>Koneksi Antar Representasi (Skor: 15)</strong><br>
+                    Kemampuan media menghubungkan representasi grafik, aljabar, dan verbal secara koheren sehingga memperkuat pemahaman konsep</li>
+                    
+                    <li><strong>Interpretasi dan Komunikasi Solusi (Skor: 15)</strong><br>
+                    Kemampuan media menyampaikan makna solusi dalam konteks masalah, termasuk kasus khusus (tak hingga solusi, tidak ada solusi)</li>
+                </ul>
+                <p style="text-align: center; margin-top: 15px; font-weight: bold; color: #d64545;">Total Skor: 100</p>
+            </div>
+        </div>
+
+        <!-- SOAL 2 - ABSTRAKSI -->
+        <div class="soal-card">
+            <div class="soal-header">
+                <div class="soal-number">2</div>
+                <div class="soal-title">
+                    <h2>Media Eksplorasi Fungsi dan Transformasinya</h2>
+                    <span class="kemampuan-badge" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">Kemampuan Abstraksi Matematis</span>
+                </div>
+            </div>
+
+            <div class="soal-content">
+                <p><strong>Deskripsi Projek:</strong></p>
+                <p>Rancanglah sebuah media pembelajaran interaktif berbasis VBA for Excel yang memungkinkan siswa untuk mengeksplorasi konsep <strong>Fungsi dan Transformasinya</strong> (fungsi kuadrat, translasi, refleksi, dilatasi). Media ini harus mendorong siswa untuk melakukan abstraksi matematis dari pola-pola yang diamati menuju pemahaman konsep yang lebih umum.</p>
+                
+                <div class="ketentuan-box">
+                    <h4>🎯 Ketentuan Media:</h4>
+                    <ul>
+                        <li>Menyediakan kontrol interaktif untuk mengubah parameter fungsi (a, b, c pada ax² + bx + c)</li>
+                        <li>Menampilkan grafik fungsi yang berubah secara real-time saat parameter dimodifikasi</li>
+                        <li>Menyediakan fitur transformasi (translasi vertikal/horizontal, refleksi, dilatasi)</li>
+                        <li>Menampilkan perbandingan grafik fungsi awal dan hasil transformasi</li>
+                        <li>Menyediakan fitur untuk mengekstrak pola dan generalisasi dari transformasi</li>
+                        <li>Menampilkan tabel nilai yang mendukung identifikasi pola</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="indikator-section" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <h3 style="color: #2563eb;">Indikator Penilaian Kemampuan Abstraksi Matematis</h3>
+                <ul class="indikator-list">
+                    <li><strong>Identifikasi Pola (Skor: 20)</strong><br>
+                    Kemampuan media memfasilitasi pengguna untuk mengidentifikasi pola perubahan grafik berdasarkan perubahan parameter fungsi melalui visualisasi dinamis</li>
+                    
+                    <li><strong>Generalisasi dari Kasus Khusus (Skor: 25)</strong><br>
+                    Kemampuan media menunjukkan bagaimana berbagai kasus khusus (contoh: f(x) = x², f(x) = 2x², f(x) = -x²) mengarah pada prinsip umum transformasi fungsi</li>
+                    
+                    <li><strong>Manipulasi Simbolik Abstrak (Skor: 20)</strong><br>
+                    Kemampuan media menampilkan perubahan bentuk aljabar fungsi ketika transformasi diterapkan (misal: f(x) → f(x-h) + k) dan menghubungkannya dengan efek visual</li>
+                    
+                    <li><strong>Pemisahan Konsep Esensial dari Detail (Skor: 20)</strong><br>
+                    Kemampuan media membantu pengguna fokus pada konsep inti transformasi tanpa terganggu detail kalkulasi, dengan menyembunyikan/menampilkan informasi sesuai kebutuhan</li>
+                    
+                    <li><strong>Konstruksi Model Matematis (Skor: 15)</strong><br>
+                    Kemampuan media memungkinkan pengguna membangun pemahaman abstrak tentang hubungan antara parameter fungsi dan bentuk grafik untuk membuat prediksi</li>
+                </ul>
+                <p style="text-align: center; margin-top: 15px; font-weight: bold; color: #2563eb;">Total Skor: 100</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💡 <strong>Catatan:</strong> Setiap projek harus disertai dokumentasi penggunaan dan video demonstrasi media.</p>
+            <p style="margin-top: 10px;">Selamat mengerjakan dan berkreasi! 🚀</p>
+        </div>
+    </div>
+</body>
+</html>
